@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Marlow &amp; Finch Barbers: classic cuts, skin fades, and hot towel shaves. Sample website design.">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}</style>
+<title>Marlow & Finch Barbers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+  /* Layout: single column, wide hero with a barber-pole stripe as the one bold element; quiet sections below. */
+  :root {
+    --bg: #f1f3f4;
+    --surface: #ffffff;
+    --fg: #14222f;
+    --muted: #4f6070;
+    --line: #cdd5db;
+    --red: #c4352b;
+    --blue: #25598c;
+    --on-red: #ffffff;
+    --pole-white: #f8f9fa;
+    --f-display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+    --f-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1923;
+      --surface: #172533;
+      --fg: #eef2f5;
+      --muted: #9fb0bf;
+      --line: #2b3b4a;
+      --red: #e0564b;
+      --blue: #5c9bd1;
+      --on-red: #1a0b09;
+      --pole-white: #e9edf0;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1923;
+    --surface: #172533;
+    --fg: #eef2f5;
+    --muted: #9fb0bf;
+    --line: #2b3b4a;
+    --red: #e0564b;
+    --blue: #5c9bd1;
+    --on-red: #1a0b09;
+    --pole-white: #e9edf0;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--f-body);
+    font-size: 17px;
+    line-height: 1.6;
+    padding-inline: 20px;
+  }
+  .wrap { max-width: 1040px; margin-inline: auto; }
+  h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 0.95; margin: 0; text-transform: uppercase; letter-spacing: 0.01em; }
+  p { margin: 0; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+  /* Header */
+  header.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 18px; border-bottom: 2px solid var(--fg); }
+  .brand { font-family: var(--f-display); font-weight: 900; font-size: 1.7rem; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1; }
+  .brand span { color: var(--red); }
+  nav.links { display: flex; gap: 22px; flex-wrap: wrap; font-weight: 500; font-size: 0.95rem; }
+  nav.links a { text-decoration: none; padding-block: 4px; border-bottom: 2px solid transparent; }
+  nav.links a:hover { border-bottom-color: var(--red); }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: 1fr 64px; gap: 40px; padding-block: 56px 48px; align-items: stretch; }
+  .hero-copy { min-width: 0; display: flex; flex-direction: column; gap: 24px; justify-content: center; }
+  .status { display: inline-flex; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; align-self: flex-start; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); }
+  .status[data-open="true"] .dot { background: #2f9e5b; }
+  .status[data-open="false"] .dot { background: var(--red); }
+  .hero h1 { font-weight: 900; font-size: clamp(3.4rem, 11vw, 7.2rem); }
+  .hero h1 em { font-style: normal; color: var(--red); }
+  .hero p.lede { max-width: 46ch; font-size: 1.15rem; color: var(--muted); }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn { display: inline-block; background: var(--red); color: var(--on-red); font-weight: 700; text-decoration: none; padding: 14px 24px; border: 0; border-radius: 2px; font-size: 1rem; font-family: var(--f-body); cursor: pointer; }
+  .btn:hover { filter: brightness(1.08); }
+  .phone { font-family: var(--f-mono); font-size: 1.05rem; }
+  .pole {
+    border-radius: 32px;
+    border: 3px solid var(--fg);
+    min-height: 300px;
+    background: repeating-linear-gradient(135deg, var(--red) 0 16px, var(--pole-white) 16px 32px, var(--blue) 32px 48px, var(--pole-white) 48px 64px);
+    background-size: 90.5px 90.5px;
+    animation: spin 5s linear infinite;
+  }
+  @keyframes spin { to { background-position: 0 90.5px; } }
+  @media (prefers-reduced-motion: reduce) { .pole { animation: none; } }
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 1fr; gap: 28px; padding-block: 36px 32px; }
+    .pole { min-height: 0; height: 22px; order: 2; animation-name: spin-x; border-width: 2px; border-radius: 12px; }
+    @keyframes spin-x { to { background-position: 90.5px 0; } }
+  }
+
+  /* Sections */
+  section { padding-block: 56px; border-top: 2px solid var(--fg); }
+  .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+  .sec-head h2 { font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 800; }
+  .sec-head .note { color: var(--muted); font-size: 0.95rem; }
+
+  /* Price board */
+  .board { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; }
+  .item { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; column-gap: 10px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+  .item .name { font-weight: 700; }
+  .item .lead { border-bottom: 2px dotted var(--line); transform: translateY(-4px); }
+  .item .price { font-family: var(--f-mono); font-weight: 500; font-size: 1.15rem; }
+  .item .desc { grid-column: 1 / -1; color: var(--muted); font-size: 0.92rem; margin-top: 2px; }
+  @media (max-width: 760px) { .board { grid-template-columns: 1fr; } }
+
+  /* Barbers */
+  .crew { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .barber { background: var(--surface); border: 1px solid var(--line); padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .barber .initials { width: 56px; height: 56px; display: grid; place-items: center; background: var(--fg); color: var(--bg); font-family: var(--f-display); font-weight: 900; font-size: 1.6rem; letter-spacing: 0.04em; }
+  .barber h3 { font-size: 1.7rem; font-weight: 800; }
+  .barber .role { font-family: var(--f-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); }
+  .barber p { color: var(--muted); font-size: 0.97rem; }
+
+  /* Visit */
+  .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .visit > div { min-width: 0; }
+  .visit h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 14px; }
+  table.hours { width: 100%; border-collapse: collapse; font-size: 1rem; }
+  table.hours th, table.hours td { text-align: left; padding: 10px 0; border-bottom: 1px solid var(--line); font-weight: 400; }
+  table.hours td { font-family: var(--f-mono); font-size: 0.95rem; text-align: right; }
+  table.hours tr.today th, table.hours tr.today td { font-weight: 700; color: var(--red); }
+  .addr { margin-top: 26px; font-style: normal; line-height: 1.7; }
+  .addr strong { display: block; }
+  .faq { margin-top: 26px; display: grid; gap: 16px; }
+  .faq dt { font-weight: 700; }
+  .faq dd { margin: 2px 0 0; color: var(--muted); font-size: 0.97rem; }
+  @media (max-width: 760px) { .visit { grid-template-columns: 1fr; gap: 40px; } }
+
+  /* Request form */
+  form.req { background: var(--surface); border: 1px solid var(--line); padding: 24px; display: grid; gap: 16px; }
+  form.req label { display: grid; gap: 6px; font-weight: 500; font-size: 0.95rem; }
+  form.req input, form.req select { font: inherit; padding: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 2px; width: 100%; }
+  form.req .fine { color: var(--muted); font-size: 0.85rem; }
+  #sent { padding: 14px; border-left: 4px solid var(--blue); background: var(--bg); font-size: 0.95rem; }
+
+  footer { border-top: 2px solid var(--fg); padding-block: 28px 40px; color: var(--muted); font-size: 0.88rem; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">Marlow <span>&amp;</span> Finch</div>
+    <nav class="links" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#barbers">Barbers</a>
+      <a href="#visit">Hours &amp; Location</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="hero-copy">
+        <div class="status" id="status" data-open="unknown"><span class="dot"></span><span id="status-text">Barbers</span></div>
+        <h1>Clean cuts.<br><em>Hot towel</em> shaves.</h1>
+        <p class="lede">A three-chair neighborhood barbershop. Classic cuts, skin fades, and straight razor shaves, with walk-ins welcome every day we are open.</p>
+        <div class="cta-row">
+          <a class="btn" href="#book">Request a time</a>
+          <span class="phone">(555) 010-2847</span>
+        </div>
+      </div>
+      <div class="pole" role="img" aria-label="Barber pole"></div>
+    </div>
+
+    <section id="services">
+      <div class="sec-head">
+        <h2>Services &amp; Prices</h2>
+        <p class="note">Cash and cards accepted. Tips never expected, always appreciated.</p>
+      </div>
+      <div class="board">
+        <div class="item"><span class="name">Classic Haircut</span><span class="lead"></span><span class="price">$30</span><span class="desc">Scissor and clipper work, neck shave, and styling. About 30 minutes.</span></div>
+        <div class="item"><span class="name">Skin Fade</span><span class="lead"></span><span class="price">$35</span><span class="desc">Zero-guard blend with a sharp line. About 40 minutes.</span></div>
+        <div class="item"><span class="name">Beard Trim &amp; Line-up</span><span class="lead"></span><span class="price">$20</span><span class="desc">Shaped, trimmed, and finished with a warm towel.</span></div>
+        <div class="item"><span class="name">Straight Razor Shave</span><span class="lead"></span><span class="price">$35</span><span class="desc">Hot towels, lather, and a single-blade shave.</span></div>
+        <div class="item"><span class="name">Cut + Beard</span><span class="lead"></span><span class="price">$50</span><span class="desc">Any haircut with a full beard trim and line-up.</span></div>
+        <div class="item"><span class="name">Kids Cut (12 &amp; under)</span><span class="lead"></span><span class="price">$22</span><span class="desc">Patient chair-side manners included.</span></div>
+        <div class="item"><span class="name">Senior Cut (65+)</span><span class="lead"></span><span class="price">$24</span><span class="desc">Same care, a little off the price.</span></div>
+        <div class="item"><span class="name">Neck &amp; Brow Clean-up</span><span class="lead"></span><span class="price">$8</span><span class="desc">A quick tidy between full cuts.</span></div>
+      </div>
+    </section>
+
+    <section id="barbers">
+      <div class="sec-head">
+        <h2>The Chairs</h2>
+        <p class="note">Ask for someone by name or take whoever is free.</p>
+      </div>
+      <div class="crew">
+        <article class="barber">
+          <div class="initials" aria-hidden="true">DM</div>
+          <h3>Dale Marlow</h3>
+          <div class="role">Owner &middot; 22 years</div>
+          <p>Classic tapers, scissor cuts, and the hot towel shave the shop is known for.</p>
+        </article>
+        <article class="barber">
+          <div class="initials" aria-hidden="true">IF</div>
+          <h3>Ines Finch</h3>
+          <div class="role">Fades &amp; texture</div>
+          <p>Skin fades, textured crops, and sharp, clean edges on every cut.</p>
+        </article>
+        <article class="barber">
+          <div class="initials" aria-hidden="true">TP</div>
+          <h3>Theo Park</h3>
+          <div class="role">Beards &amp; kids</div>
+          <p>Beard shaping and line-ups, plus the calmest hands in the shop for first haircuts.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="visit">
+      <div class="sec-head">
+        <h2>Hours &amp; Location</h2>
+        <p class="note">Walk-ins first come, first served. Booked times get priority.</p>
+      </div>
+      <div class="visit">
+        <div>
+          <h3>Opening Hours</h3>
+          <table class="hours" id="hours">
+            <tbody>
+              <tr data-day="1"><th scope="row">Monday</th><td>Closed</td></tr>
+              <tr data-day="2"><th scope="row">Tuesday</th><td>9:00 AM &ndash; 7:00 PM</td></tr>
+              <tr data-day="3"><th scope="row">Wednesday</th><td>9:00 AM &ndash; 7:00 PM</td></tr>
+              <tr data-day="4"><th scope="row">Thursday</th><td>9:00 AM &ndash; 7:00 PM</td></tr>
+              <tr data-day="5"><th scope="row">Friday</th><td>9:00 AM &ndash; 7:00 PM</td></tr>
+              <tr data-day="6"><th scope="row">Saturday</th><td>8:00 AM &ndash; 5:00 PM</td></tr>
+              <tr data-day="0"><th scope="row">Sunday</th><td>10:00 AM &ndash; 3:00 PM</td></tr>
+            </tbody>
+          </table>
+          <address class="addr">
+            <strong>Marlow &amp; Finch Barbers</strong>
+            418 Cedar Street, Suite 2<br>
+            Free parking behind the building<br>
+            <span class="phone">(555) 010-2847</span>
+          </address>
+        </div>
+        <div>
+          <h3 id="book">Request a Time</h3>
+          <form class="req" id="reqform">
+            <label for="f-name">Your name
+              <input id="f-name" name="name" type="text" autocomplete="name" required>
+            </label>
+            <label for="f-phone">Phone number
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
+            </label>
+            <label for="f-service">Service
+              <select id="f-service" name="service">
+                <option>Classic Haircut</option>
+                <option>Skin Fade</option>
+                <option>Beard Trim &amp; Line-up</option>
+                <option>Straight Razor Shave</option>
+                <option>Cut + Beard</option>
+                <option>Kids Cut</option>
+              </select>
+            </label>
+            <label for="f-when">Preferred day and time
+              <input id="f-when" name="when" type="text" placeholder="Saturday morning">
+            </label>
+            <button class="btn" type="submit">Send request</button>
+            <p class="fine">We text you back to confirm. No payment needed to request a time.</p>
+            <div id="sent" hidden role="status"></div>
+          </form>
+          <dl class="faq">
+            <div><dt>Do I need an appointment?</dt><dd>No. Walk in any time we are open. Booked customers go first, and we will give you an honest wait time at the door.</dd></div>
+            <div><dt>Do you cut kids' hair?</dt><dd>Yes, any age. Bring them in for a first haircut.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>&copy; Marlow &amp; Finch Barbers</span>
+    <span>Sample website design. Shop name, people, and contact details are fictional.</span>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    // Hours by weekday (0 = Sunday), 24h clock, in the shop's local time.
+    var hours = { 0: [10, 15], 1: null, 2: [9, 19], 3: [9, 19], 4: [9, 19], 5: [9, 19], 6: [8, 17] };
+    var now = new Date();
+    var day = now.getDay();
+    var h = now.getHours() + now.getMinutes() / 60;
+    var today = hours[day];
+    var open = !!today && h >= today[0] && h < today[1];
+
+    var row = document.querySelector('#hours tr[data-day="' + day + '"]');
+    if (row) row.className = 'today';
+
+    function fmt(hr) {
+      var ap = hr >= 12 ? 'PM' : 'AM';
+      var n = hr % 12 === 0 ? 12 : hr % 12;
+      return n + ':00 ' + ap;
+    }
+    var status = document.getElementById('status');
+    var text = document.getElementById('status-text');
+    if (open) {
+      status.setAttribute('data-open', 'true');
+      text.textContent = 'Open now · until ' + fmt(today[1]);
+    } else {
+      status.setAttribute('data-open', 'false');
+      var label = 'Closed now';
+      if (today && h < today[0]) label += ' · opens ' + fmt(today[0]);
+      else {
+        for (var i = 1; i <= 7; i++) {
+          var d = (day + i) % 7;
+          if (hours[d]) {
+            var names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            label += ' · opens ' + (i === 1 ? 'tomorrow' : names[d]) + ' ' + fmt(hours[d][0]);
+            break;
+          }
+        }
+      }
+      text.textContent = label;
+    }
+
+    var form = document.getElementById('reqform');
+    var sent = document.getElementById('sent');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('f-name').value.trim();
+      sent.hidden = false;
+      sent.textContent = 'Thanks' + (name ? ', ' + name : '') + '. This is a demo form, so nothing was sent. On the live site, requests go straight to the shop’s phone and email.';
+    });
+  })();
+</script>
+
+</body>
+</html>
